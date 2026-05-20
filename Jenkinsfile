@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Get code and build artifact') {
             steps {
-                sh 'docker build -t myapp1:$BUILD_NUMBER'
+                sh 'docker build . -t myapp1:$BUILD_NUMBER'
             }
         }
         stage('Push artifact)') {
