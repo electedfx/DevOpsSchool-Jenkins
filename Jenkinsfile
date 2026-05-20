@@ -1,19 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:dind'
-            args '--privileged'
-            label 'builder'
-        }
 
+    agent {
+        label 'builder'
     }
 
     stages {
         stage ('Get code and build artifact') {
             steps {
                 sh 'docker build -t myapp1:$BUILD_NUMBER'
-                sh 'docker tag myapp1:$BUILD_NUMBER 81.26.183.248:8082/myapp1:$BUILD_NUMBER'
-
             }
         }
         stage('Push artifact)') {
