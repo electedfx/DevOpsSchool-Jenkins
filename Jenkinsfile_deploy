@@ -15,7 +15,6 @@ pipeline {
             steps {
                 sshCommand(
                     remote: [
-                        name: 'app',
                         hostName: '158.160.247.131',
                         user: 'superuser',
                         port: 22,
