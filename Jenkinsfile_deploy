@@ -4,6 +4,13 @@ pipeline {
         string(name: 'BUILDTAG', defaultValue: '')
     }
     stages {
+        stage ('Login to registry'){    
+            steps {
+                 withCredentials([usernamePassword(credentialsId: '3a4a8403-586d-4657-afbe-85f8684e491d', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh "docker login -u $DOCKER_USER -p $DOCKER_PASS 158.160.240.225:8082"
+                   }
+            }
+        }
         stage('Deploy') {
             steps {
                 sshCommand(
