@@ -9,9 +9,16 @@ pipeline {
             steps {
                 sh 'docker build . -t myapp1:$BUILD_NUMBER'
                 sh 'docker tag myapp1:$BUILD_NUMBER 158.160.240.225:8082/myapp1:$BUILD_NUMBER'
+                
             }
         }
-
+    stage ('Prepere unsecure login') {
+            steps {
+                sh 'echo '{"insecure-registries":["158.160.240.225:8081","158.160.240.225:8082"]}' | sudo tee /etc/docker/daemon.json > /dev/null'
+                sh 'sudo systemctl restart docker'
+                
+            }
+        }        
         stage ('Push artifact)') {
             steps {
                 withCredentials([usernamePassword(credentialsId: '3a4a8403-586d-4657-afbe-85f8684e491d', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
