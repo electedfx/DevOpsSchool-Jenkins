@@ -1,7 +1,7 @@
 pipeline {
     agent  any 
     parameters {
-        string(name: 'BUILDTAG', defaultValue: '')
+        string(name: 'BUILDTAG', defaultValue: '10')
     }
     stages {
         stage ('Login to registry'){    
