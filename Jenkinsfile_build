@@ -21,9 +21,9 @@ pipeline {
             }
         }
 
-        stage ('Run ') {
+        stage ('Run deploy pipeline') {
             steps {
-                
+                build job: 'Deploy_image_and_run_app', parameters: [[$class: 'StringParameterValue', name: 'BUILDTAG', value: $BUILD_NUMBER]]
             }
         }
     }
