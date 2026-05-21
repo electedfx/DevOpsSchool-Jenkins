@@ -17,11 +17,13 @@ pipeline {
                     server: '158.160.247.131',  
                     credentialsId: 'superuser',  
                     command:
-                        sh "set -e"
-                        sh "docker pull 158.160.240.225:8082/myapp1:${params.BUILDTAG}"
-                        sh "docker stop myapp1 2>/dev/null || true"
-                        sh "docker rm myapp1 2>/dev/null || true"
-                        sh "docker run -d --name myapp1 --restart=unless-stopped -p 8082:8080 158.160.240.225:8081/myapp1:${params.BUILDTAG}"
+                        command: """
+                        set -e
+                        docker pull 158.160.240.225:8082/myapp1:${params.BUILDTAG}
+                        docker stop myapp1 2>/dev/null || true
+                        docker rm myapp1 2>/dev/null || true
+                        docker run -d --name myapp1 --restart=unless-stopped -p 8082:8080 158.160.240.225:8082/myapp1:${params.BUILDTAG}
+                    """.stripIndent()
                       )
             }
         }
