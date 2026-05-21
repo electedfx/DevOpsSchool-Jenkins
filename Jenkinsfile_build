@@ -3,7 +3,7 @@ pipeline {
     agent {
         label 'builder'
     }
-
+    
     stages {
         stage ('Get code and build artifact') {
             steps {
@@ -24,7 +24,7 @@ pipeline {
 
         stage ('Run deploy pipeline') {
             steps {
-                build job: 'Deploy_image_and_run_app', parameters: [[$class: 'StringParameterValue', name: 'BUILDTAG', value: $BUILD_NUMBER]]
+                build job: 'Deploy_image_and_run_app', parameters: [string(name: 'BUILDTAG', value: "$BUILD_NUMBER")]
             }
         }
     }
