@@ -11,10 +11,10 @@ pipeline {
                     credentialsId: 'superuser',  
                     command:
                         set -e
-                        docker pull 158.160.240.225:8082/myapp1:$BUILDTAG
+                        docker pull 158.160.240.225:8082/myapp1:${params.BUILDTAG}
                         docker stop myapp1 2>/dev/null || true
                         docker rm myapp1 2>/dev/null || true
-                        docker run -d --name myapp1 --restart=unless-stopped -p 8082:8080 158.160.240.225:8081/myapp1:$BUILDTAG
+                        docker run -d --name myapp1 --restart=unless-stopped -p 8082:8080 158.160.240.225:8081/myapp1:${params.BUILDTAG}
                       )
             }
         }
