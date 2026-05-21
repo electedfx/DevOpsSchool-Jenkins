@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage ('Deploy & run container') {
+        stage ('Run ') {
             steps {
                 
             }
