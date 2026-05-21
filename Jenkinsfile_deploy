@@ -20,6 +20,7 @@ pipeline {
                         user: 'superuser',
                         port: 22,
                         sshKeyCredentialId: 'superuser'
+                        allowAnyHosts: true
                     ],
                     command: """
                         set -e
