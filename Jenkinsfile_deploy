@@ -14,8 +14,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshCommand(
-                    server: '158.160.247.131',  
-                    credentialsId: 'superuser',  
+                    remote: [
+                        name: 'app',
+                        hostName: '158.160.247.131',
+                        userName: 'superuser',
+                        port: 22,
+                        sshKeyCredentialId: 'superuser'
+                    ],
                     command: """
                         set -e
                         docker pull 158.160.240.225:8082/myapp1:${params.BUILDTAG}
